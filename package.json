@@ -15,7 +15,7 @@
     "stylelint": "^13.6.1",
     "stylelint-scss": "^3.18.0"
   },
-  "scripts": {
+  "scripts": { 
     "init-project": "npm install && npm-run-all init:*",
     "init:dirs": "mkdirp sass css vendor images js",
     "init:files": "touch README.md index.html sass/style.scss js/script.js",
