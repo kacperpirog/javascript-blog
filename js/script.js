@@ -33,6 +33,7 @@ const optArticleSelector = '.post',
   optArticleTagsSelector = 'post-tags .list',
   optArticleAuthorSelector = '.post-author';
   
+  
 function generateTitleLinks(customSelector = ''){
   console.log('Links generated');
  
@@ -77,35 +78,37 @@ generateTitleLinks();
 
 
 
-function generateTags(){
+function generateTags() {
 
   /* find all articles */
-  const articles = document.querySelectorAll(optArticleTagsSelector);
-  
-  /* START LOOP: for every article: */
-  for (let article of articles) {
+  const articles = document.querySelectorAll(optArticleSelector);
+  console.log('articles:' + articles);
 
+  /* START LOOP: for every article: */
+  for (const article of articles) {
     /* find tags wrapper */
     const tagsWrapper = article.querySelector(optArticleTagsSelector);
+    console.log(tagsWrapper);
 
     /* make html variable with empty string */
-    let html= '';
+    let html = '';
 
     /* get tags from data-tags attribute */
     const articleTags = article.getAttribute('data-tags');
-    console.log('article tags: ' + articleTags);
+    console.log(articleTags);
 
     /* split tags into array */
     const articleTagsArray = articleTags.split(' ');
     console.log(articleTagsArray);
-    
+
     /* START LOOP: for each tag */
-    for(const tag of articleTagsArray){
-      console.log('articleTag: ' + tag);
-      
+    for (let tag of articleTagsArray) {
+      console.log(tag);
+
       /* generate HTML of the link */
-      const linkHTML = '<li><a href="#tag-' + articleTags + '"><span>' + tagsWrapper + '</span></a></li>';
-      console.log(articleTags + linkHTML);
+      const linkHTML = '<li><a href="#tag-' + tag + '">' + tag + '</a></li> ';
+      console.log(linkHTML);
+
       /* add generated code to html variable */
       html = html + linkHTML;
       console.log('Tag html:' + html);
@@ -113,10 +116,11 @@ function generateTags(){
     }
     /* insert HTML of all the links into the tags wrapper */
     tagsWrapper.innerHTML = html;
+    console.log(tagsWrapper);
   /* END LOOP: for every article: */
   }
 }
-console.log(generateTags);
+
 generateTags();
 
 function tagClickHandler(event){
@@ -138,6 +142,7 @@ function tagClickHandler(event){
   }
   /* find all tag links with "href" attribute equal to the "href" constant */
   const tagLinks = document.querySelectorAll('a[href="' + href + '"]');
+  console.log(tagLinks);
   /* START LOOP: for each found tag link */
   for( const tagLink of tagLinks){
     /* add class active */
@@ -148,19 +153,20 @@ function tagClickHandler(event){
   generateTitleLinks('[data-tags~="' + tag + '"]');
 }
 
-function addClickListenersToTags(){
+function addClickListenersToTags() {
   /* find all links to tags */
-  const links = document.querySelectorAll('[href^="#tag-"]');
-  console.log('Tag Links', links);
+  const linksToTags = document.querySelectorAll('a[href^="#tag-"]');
+  // console.log(linksToTags);
   /* START LOOP: for each link */
-  for(const link of links){
+  for (const linkToTag of linksToTags) {
     /* add tagClickHandler as event listener for that link */
-    link.addEventListener('click', tagClickHandler);
-  /* END LOOP: for each link */
+    linkToTag.addEventListener('click', tagClickHandler);
+    // console.log('linkToTag: ' + linkToTag);
+    /* END LOOP: for each link */
   }
 }
-
 addClickListenersToTags();
+
 
 function generateAuthors (){
   /* find all articles */
@@ -176,12 +182,12 @@ function generateAuthors (){
     let html = '';
 
     /* get authors from data-author attribute */
-    const articleAuthor = article.getAttribute('data-author');
-    console.log('article author: ' + articleAuthor);
+    const tagsAuthor = article.getAttribute('data-author');
+    console.log(tagsAuthor);
 
     /* generate HTML of the link */
-    const linkHTML = '<li><a href="#' + authorWrapper + '"><span>' + articleAuthor + '</span></a></li>';
-    console.log(articleAuthor + authorWrapper);
+    const linkHTML = '<li><a href="#author-' + tagsAuthor + '">' + tagsAuthor + '</a></li>';
+    console.log('linkHTML do tagsAuthor: ' + linkHTML);
 
     /* add generated code to html variable */
     html = html + linkHTML;
