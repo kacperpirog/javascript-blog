@@ -16,7 +16,7 @@
             </ul>
           </aside>
           <section class="posts">
-            <article class="post active" id="article-1" data-tags="cat  scissors" data-author="Marion Berry">
+            <article class="post active" id="article-1" data-tags="cat scissors" data-author="Marion Berry">
               <h3 class="post-title">Article 1</h3>
               <div class="post-author" > </div>
               <div class="post-content">
@@ -204,6 +204,27 @@
         </main>
       </div>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.0/handlebars.min.js"></script>
+    <script id="template-article-link" type="text/x-handlebars-template">
+      <li><a href="#{{ id }}"><span>{{ title }}</span></a></li>
+    </script>
+    
+    <script id="template-tag-link" type="text/x-handlebars-template">
+      <li><a href="#tag-{{ linkTag }}"> {{ title }} </a></li>
+    </script>
+    
+    <script id="template-author-link" type="text/x-handlebars-template">
+      <li><a href="#author-{{ linkAuthor }}"> by {{ title }} </a></li>
+    </script>
+
+    <script id="template-tag-cloud-link" type="text/x-handlebars-template">
+      {{#each tags}}
+      <a href="#tag-{{ tag }}" class="{{ className }}"> {{ tag }}  ({{ count }}) </a> 
+      {{/each}}
+    </script>
+
     <script src="js/script.js"></script>
   </body>    
 </html>
+
+
